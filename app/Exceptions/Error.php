@@ -4,7 +4,7 @@ namespace App\Exceptions;
 
 class Error extends \Exception
 {
-    private
+    protected
         $reason,
         $error_code,
         $title,
@@ -45,7 +45,7 @@ class Error extends \Exception
             "description" => $this->description,
             "reason" => $this->reason,
             "error_code" => $this->error_code,
-            "error_stack" => $this->prevErrorModel->serve_exception,
+            "error_stack" => $this->prevErrorModel?->serve_exception,
             "exception" => $this->exception
         ];
     }
