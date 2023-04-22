@@ -26,6 +26,9 @@ if ((float)PCRE_VERSION < 8.0)
 
 // Load configuration
 $f3->config('config.ini');
+$f3->config('app/enums/status.php');
+// Include API routes
+include('routes/api.php');
 
 $f3->route(
 	'GET /',
