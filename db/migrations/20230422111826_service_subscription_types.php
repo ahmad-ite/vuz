@@ -18,11 +18,11 @@ final class ServiceSubscriptionTypes extends AbstractMigration
             ->addColumn('subscription_type_id', 'biginteger', ['null' => false])
             ->addForeignKey('subscription_type_id', 'subscription_types', 'id', ['delete' => 'CASCADE', 'update' => 'CASCADE'])
 
-            ->addIndex(['partner_service_id', 'subscription_type_id'])
+            ->addIndex(['partner_service_id', 'subscription_type_id'], ['unique' => true])
 
             //reference_subscription_id is a subscription id that shared by the partner for this service
             ->addColumn('reference_subscription_id', 'string', ['null' => false])
-            ->addIndex('reference_subscription_id', ['unique' => true])
+            ->addIndex(['partner_service_id', 'reference_subscription_id'], ['unique' => true])
 
             ->addColumn('price', 'decimal', ['null' => false, 'precision' => 10, 'scale' => 2])
             ->addColumn('currency', 'string', ['null' => false, 'default' => 'USD'])
