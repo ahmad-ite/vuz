@@ -6,7 +6,7 @@ use App\Repositories\BaseRepository;
 
 class SubscriptionRepository extends BaseRepository
 {
-    public function __construct($table = 'subscriptions')
+    public function __construct($table = 'subscription_requests')
     {
         parent::__construct($table);
     }
