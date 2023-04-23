@@ -1,0 +1,259 @@
+{
+	"info": {
+		"_postman_id": "dd7405ae-bcec-4a96-a551-a5dab3a73581",
+		"name": "360VUZ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4254490"
+	},
+	"item": [
+		{
+			"name": "subscription webhook",
+			"item": [
+				{
+					"name": "webhook succeed",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "sign",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"event\": \"subscription.succeed\",\n    \"data\": {\n        \"id\": \"ch_1234567890\",\n        \"subscriptionId\": \"2\",\n        \"msisdn\": \"1234567890\",\n        \"action\": \"sub\",\n        \"amount\": 10,\n        \"currency\": \"USD\",\n        \"email\": \"test@example.com\",\n        \"description\": \"des\",\n        \"error\": \"\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/webhook",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"webhook"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "webhook failed",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "sign",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"event\": \"subscription.failed\",\n    \"data\": {\n        \"id\": \"ch_1234567890\",\n        \"subscriptionId\": \"2\",\n        \"msisdn\": \"1234567890\",\n        \"action\": \"sub\",\n        \"amount\": 10,\n        \"currency\": \"USD\",\n        \"email\": \"test@example.com\",\n        \"description\": \"des\",\n            \"error\": \"invalid msisdn\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/webhook",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"webhook"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "unsubscription webhook",
+			"item": [
+				{
+					"name": "webhook succeed",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "sign",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"event\": \"unsubscription.succeed\",\n    \"data\": {\n        \"id\": \"ch_1234567890\",\n        \"subscriptionId\": \"1\",\n        \"msisdn\": \"1234567890\",\n        \"action\": \"unsub\",\n        \"amount\": 10,\n        \"currency\": \"USD\",\n        \"email\": \"test@example.com\",\n        \"description\": \"des\",\n        \"error\": \"\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/webhook",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"webhook"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "webhook failed",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "sign",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"event\": \"unsubscription.failed\",\n    \"data\": {\n        \"id\": \"ch_1234567890\",\n        \"subscriptionId\": \"1\",\n        \"msisdn\": \"1234567890\",\n        \"action\": \"unsub\",\n        \"amount\": 10,\n        \"currency\": \"USD\",\n        \"email\": \"test@example.com\",\n        \"description\": \"des\",\n            \"error\": \"invalid msisdn\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/webhook",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"webhook"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "user@test.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{domain}}/api/login",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "subscribe",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{access_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "service_subscription_type_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{domain}}/api/subscribe",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"api",
+						"subscribe"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "unsubscribe",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{access_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "subscription_request_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{domain}}/api/unsubscribe",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"api",
+						"unsubscribe"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "domain",
+			"value": "http://localhost:9000"
+		}
+	]
+}
