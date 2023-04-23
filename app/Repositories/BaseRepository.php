@@ -27,6 +27,23 @@ class BaseRepository
         return 0;
     }
 
+    function update($id, $data = [])
+    {
+        $id = intval($id);
+
+        // Build the query
+        $query = "UPDATE $this->table SET ";
+        foreach ($data as $key => $value) {
+            $query .= "`$key` = '$value',";
+        }
+        $query = rtrim($query, ','); // Remove the trailing comma
+        $query .= " WHERE `id` = $id";
+
+        // Execute the query
+        $result = $this->db->exec($query);
+        return $result;
+    }
+
     public function getAll()
     {
         $result = $this->db->exec("SELECT * FROM $this->table");
@@ -35,6 +52,7 @@ class BaseRepository
 
     public function getById($id)
     {
+        $id = intval($id);
         $result = $this->db->exec("SELECT * FROM $this->table WHERE id = ?", $id);
         if ($result) {
             $obj = new stdClass();
@@ -56,6 +74,7 @@ class BaseRepository
 
     public function deleteById($id)
     {
+        $id = intval($id);
         $this->db->exec("DELETE FROM $this->table WHERE id = ?", $id);
     }
 

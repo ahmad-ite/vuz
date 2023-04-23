@@ -1,0 +1,14 @@
+{
+    "event": "unsubscription.failed",
+    "data": {
+        "id": "ch_1234567890",
+        "subscriptionId": "3",
+        "msisdn": "1234567890",
+        "action": "unsub",
+        "amount": 10,
+        "currency": "USD",
+        "email": "test@example.com",
+        "description": "des",
+        "error": "invalid msisdn"
+    }
+}

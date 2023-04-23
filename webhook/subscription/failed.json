@@ -1,0 +1,14 @@
+{
+    "event": "subscription.failed",
+    "data": {
+        "id": "ch_1234567890",
+        "subscriptionId": "1",
+        "msisdn": "1234567890",
+        "action": "sub",
+        "amount": 10,
+        "currency": "USD",
+        "email": "test@example.com",
+        "description": "des",
+            "error": "invalid msisdn"
+    }
+}

@@ -12,10 +12,7 @@ class RequestValidation
 
     protected $rules = [];
 
-    // public function __construct($rules)
-    // {
-    //     $this->rules = $rules;
-    // }
+
     /**
      * validate data 
      *  @param [] $data assoisative array

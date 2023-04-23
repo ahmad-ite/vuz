@@ -25,7 +25,7 @@ final class SubscriptionRequests extends AbstractMigration
             //parent_subscription_request_id to strore subscription_request_id  linke to unsubscripe request
             ->addColumn('parent_subscription_request_id', 'biginteger', ['null' => true])
             // ->addForeignKey('parent_subscription_request_id',  'subscription_requests', 'id', ['delete' => 'RESTRICT', 'update' => 'RESTRICT'])
-
+            ->addIndex(['id', 'status'], ['unique' => true])
             ->addIndex(['id', 'status', 'type', 'user_id', 'service_subscription_type_id'])
             ->addTimestamps()
             ->addColumn('deleted_at', 'datetime', ['null' => true])
@@ -35,7 +35,8 @@ final class SubscriptionRequests extends AbstractMigration
         $this->execute("ALTER TABLE subscription_requests PARTITION BY LIST (status)
             (PARTITION p_pending VALUES IN (1),
              PARTITION p_subscripe VALUES IN (2),
-             PARTITION p_unubscripe VALUES IN (3))");
+             PARTITION p_unubscripe VALUES IN (3),
+             PARTITION p_rejected VALUES IN (4))");
     }
 
     public function down(): void

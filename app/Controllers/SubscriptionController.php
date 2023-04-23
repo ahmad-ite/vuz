@@ -94,7 +94,7 @@ class SubscriptionController
       throw new NotFoundException('service subscription type not found.');
     }
 
-    //validate previos active subscription
+    //validate previous active subscription
     $output = $this->subscriptionRequestRepository->getByWhere("user_id = $userId and service_subscription_type_id=$serviceSubscriptionTypeId and type ='" . SUB . "' and status=" . SUBSCRIBE);
     if ($output) {
       throw new DuplicateException('duplicate active  subscription.');
