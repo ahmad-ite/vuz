@@ -5,7 +5,7 @@ namespace App\Requests;
 use Respect\Validation\Validator as v;
 
 
-class SubscribeRequestValidation extends RequestValidation
+class LoginRequestValidation extends RequestValidation
 {
 
     protected $rules;
@@ -13,7 +13,8 @@ class SubscribeRequestValidation extends RequestValidation
     public function __construct()
     {
         $this->rules = [
-            'service_subscription_type_id' => v::notEmpty()->intVal(),
+            'email' => v::notEmpty()->stringVal(),
+            'password' => v::notEmpty()->stringVal(),
         ];
     }
 }

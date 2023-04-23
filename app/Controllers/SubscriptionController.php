@@ -68,7 +68,6 @@ class SubscriptionController
   {
     //Fetch request data
     $data = \F3::get('REQUEST');
-
     // Input validation 
     $subscribeRequestValidation = new SubscribeRequestValidation();
     $subscribeRequestValidation->validate($data);
@@ -78,7 +77,7 @@ class SubscriptionController
     $serviceSubscriptionTypeId = $data['service_subscription_type_id'];
 
     // Get the user ID from the request
-    $userId = $data['user_id'];
+    $userId = \F3::get('SESSION.user');
 
     // Get user
     $user = $this->userRepository->getById($userId);
@@ -164,6 +163,11 @@ class SubscriptionController
     // If the subscription Request is not found, return a 404 error
     if (!$subscriptionRequest) {
       throw new NotFoundException('subscription Request not found.');
+    }
+
+    //check subscription Request owner
+    if ($subscriptionRequest->user_id != \F3::get('SESSION.user')) {
+      throw new InvalidInputException('invalid subscription Request user');
     }
 
     //check subscription Request type && status

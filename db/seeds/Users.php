@@ -1,6 +1,5 @@
 <?php
 
-use Cake\Utility\Hash;
 use Phinx\Seed\AbstractSeed;
 use Faker\Factory as Faker;
 
@@ -20,9 +19,9 @@ class Users extends AbstractSeed
         $data = [
             [
                 'name' => 'Test User',
-                'email' => 'user@test.com',
+                'email' => 'user3@test.com',
                 'phone' => $faker->phoneNumber,
-                'password' => hash('sha256', 'password'),
+                'password' => password_hash('password', null),
                 'created_at' => date('Y-m-d H:i:s'),
                 'email_verified_at' => date('Y-m-d H:i:s')
             ]
