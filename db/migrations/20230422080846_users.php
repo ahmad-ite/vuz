@@ -12,6 +12,7 @@ final class Users extends AbstractMigration
         $table = $this->table('users', ['id' => false]);
         $table->addColumn('id', 'biginteger', ['identity' => true])
             ->addColumn('name', 'string', ['null' => false])
+            ->addColumn('phone', 'string', ['null' => false])
             ->addColumn('email', 'string', ['null' => false, 'limit' => 255])
             ->addColumn('password', 'string', ['null' => false])
             ->addColumn('created_at', 'date', ['default' => date('Y-m-d')])

@@ -18,7 +18,13 @@ class BaseRepository
 
     public function add($data)
     {
-        return $this->db->insert($this->table, $data);
+        // prepare the insert query
+        $query = "INSERT INTO $this->table(" . implode(", ", array_keys($data)) . ") VALUES ('" . implode("', '", array_values($data)) . "')";
+        if ($this->db->exec($query)) {
+            $lastId = $this->db->lastInsertId();
+            return $lastId;
+        }
+        return 0;
     }
 
     public function getAll()
@@ -42,9 +48,15 @@ class BaseRepository
         return null;
     }
 
-    public function deleteById($table, $id)
+    public function getByWhere($where = "1")
     {
-        $this->db->exec("DELETE FROM $table WHERE id = ?", $id);
+        $result = $this->db->exec("SELECT * FROM $this->table where $where");
+        return $result;
+    }
+
+    public function deleteById($id)
+    {
+        $this->db->exec("DELETE FROM $this->table WHERE id = ?", $id);
     }
 
     // add other common functions here

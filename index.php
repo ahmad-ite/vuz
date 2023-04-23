@@ -4,6 +4,8 @@
 require_once __DIR__ . '/app/app.php';
 require_once __DIR__ . '/app/config.php';
 require_once __DIR__ . '/app/autoload.php';
+require_once __DIR__ . '/app/enums/status.php';
+require_once __DIR__ . '/app/enums/type.php';
 spl_autoload_register('my_autoloader_function');
 
 //init F3
@@ -20,13 +22,13 @@ if (file_exists('vendor/autoload.php')) {
 }
 
 
-$f3->set('DEBUG', 1);
+$f3->set('DEBUG', 3);
 if ((float)PCRE_VERSION < 8.0)
 	trigger_error('PCRE version is out of date');
 
 // Load configuration
 $f3->config('config.ini');
-$f3->config('app/enums/status.php');
+
 // Include API routes
 include('routes/api.php');
 

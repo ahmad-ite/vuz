@@ -12,21 +12,30 @@ final class SubscriptionRequests extends AbstractMigration
         $table->addColumn('id', 'biginteger', ['identity' => true, 'null' => false])
 
             ->addColumn('user_id', 'biginteger')
-            // ->addForeignKey('user_id',  'users', 'id', ['delete' => 'CASCADE', 'update' => 'CASCADE'])
+            // ->addForeignKey('user_id',  'users', 'id', ['delete' => 'CASCADE', 'update' => 'RESTRICT'])
 
             ->addColumn('service_subscription_type_id', 'biginteger', ['null' => false])
-            // ->addForeignKey('service_subscription_type_id',  'service_subscription_types', 'id', ['delete' => 'CASCADE', 'update' => 'CASCADE'])
+            // ->addForeignKey('service_subscription_type_id',  'service_subscription_types', 'id', ['delete' => 'RESTRICT', 'update' => 'RESTRICT'])
+
 
             ->addColumn('status', 'integer', ['null' => false, 'default' => 1])
-            ->addIndex(['id', 'status', 'user_id', 'service_subscription_type_id'])
+
+            ->addColumn('type', 'string', ['null' => false, 'default' => 'sub']) //sub-unsub
+
+            //parent_subscription_request_id to strore subscription_request_id  linke to unsubscripe request
+            ->addColumn('parent_subscription_request_id', 'biginteger', ['null' => true])
+            // ->addForeignKey('parent_subscription_request_id',  'subscription_requests', 'id', ['delete' => 'RESTRICT', 'update' => 'RESTRICT'])
+
+            ->addIndex(['id', 'status', 'type', 'user_id', 'service_subscription_type_id'])
             ->addTimestamps()
             ->addColumn('deleted_at', 'datetime', ['null' => true])
             ->create();
 
+
         $this->execute("ALTER TABLE subscription_requests PARTITION BY LIST (status)
             (PARTITION p_pending VALUES IN (1),
              PARTITION p_subscripe VALUES IN (2),
-             PARTITION p_iunubscripe VALUES IN (3))");
+             PARTITION p_unubscripe VALUES IN (3))");
     }
 
     public function down(): void
