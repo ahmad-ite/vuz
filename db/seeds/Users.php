@@ -19,7 +19,7 @@ class Users extends AbstractSeed
         $data = [
             [
                 'name' => 'Test User',
-                'email' => 'user3@test.com',
+                'email' => 'user@test.com',
                 'phone' => $faker->phoneNumber,
                 'password' => password_hash('password', null),
                 'created_at' => date('Y-m-d H:i:s'),

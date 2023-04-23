@@ -52,16 +52,16 @@ run
 
 or use `vuz_db.sql` to insert schema and data
 
-<!-- Tests User
+Tests User
 
 ```bash
-  email: admin@test.com
+  email: user@test.com
   pass: password
-``` -->
+```
 
 # Postman APIs
 
-use `postman/collention.json`
+use `postman/360VUZ.postman_collection.json`
 
 # Callback Samples
 
